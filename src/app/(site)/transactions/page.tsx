@@ -1,4 +1,5 @@
 import { Transaction } from "@/components/Transaction";
+import { User } from "../user";
 
 export default async function transaction() {
 
@@ -17,6 +18,7 @@ export default async function transaction() {
 
   return (
     <main>
+      <User />
       <h1 className="text-2xl">Transactions</h1>
       <Transaction transactions={data.result} />
     </main>
