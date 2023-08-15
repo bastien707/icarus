@@ -1,7 +1,10 @@
-import { Transaction } from "@/components/Transaction";
+import Transaction from "@/components/Transaction";
 import { User } from "../user";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function transaction() {
+  const session = await getServerSession(authOptions);
 
   const getTransactions = async () => {
     const res = await fetch(
@@ -19,6 +22,7 @@ export default async function transaction() {
   return (
     <main>
       <User />
+      <pre>{JSON.stringify(session)}</pre>
       <h1 className="text-2xl">Transactions</h1>
       <Transaction transactions={data.result} />
     </main>
