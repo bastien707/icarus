@@ -2,7 +2,9 @@ import "../globals.css";
 import { Space_Grotesk } from "@next/font/google";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LoginButton, LogoutButton, RegisterButton } from "./auth";
+import { RegisterButton } from "@/components/ui/button/RegisterButton";
+import { LogoutButton } from "@/components/ui/button/LogoutButton";
+import { LoginButton } from "@/components/ui/button/LoginButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 

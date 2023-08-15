@@ -1,10 +1,11 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import { LoginButton } from "../auth";
+import { LoginButton } from "@/components/ui/button/LoginButton";
 import Field from "@/components/ui/form/Field";
 import { useRouter } from "next/navigation";
-import MainButton from "@/components/ui/button/mainButton";
+import MainButton from "@/components/ui/button/MainButton";
+import Link from "next/link";
 
 interface FormValues {
   email: string;
@@ -105,7 +106,7 @@ export default function RegisterForm({ title }: { title: string }) {
           />
         ))}
         <p className="text-gray-500 text-sm py-2">
-          Have an account ? <LoginButton />
+          Have an account ? <Link href="/login" className="underline underline-offset-2" >Login</Link>
         </p>
         <MainButton text="Register" disabled={loading} margin="my-3"/>
       </form>
