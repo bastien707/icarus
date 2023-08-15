@@ -19,7 +19,7 @@ export default function Input({type, name, value, placeholder, changeHandler}: I
         value={value}
         onChange={changeHandler}
         placeholder={placeholder}
-        className="p-2 block w-full focus:outline-none ring-icarus-yellow focus:ring-1 focus:border-icarus-yellow shadow-sm sm:text-sm border-slate-800 border-2"
+        className="p-2 block w-full focus:outline-none ring-black focus:ring-1 focus:border-black shadow-sm sm:text-sm border-slate-800 border-2"
       />
     );
 }

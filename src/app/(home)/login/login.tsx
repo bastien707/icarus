@@ -15,7 +15,7 @@ interface FormValues {
 
 export default function LoginForm({ title }: { title: string }) {
   const searchParams = useSearchParams();
-  const callBackUrl = searchParams.get("callbackUrl") || "/transactions";
+  const callBackUrl = searchParams.get("callbackUrl") || "/dashboard/overview";
   const error = searchParams.get("error") ? "Invalid credentials" : "";
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({
