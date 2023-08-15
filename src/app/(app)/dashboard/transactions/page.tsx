@@ -1,7 +1,7 @@
 import Transaction from "@/components/Transaction";
-import { User } from "../user";
+import { User } from "../../user";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "../../../api/auth/[...nextauth]/route";
 
 export default async function transaction() {
   const session = await getServerSession(authOptions);
