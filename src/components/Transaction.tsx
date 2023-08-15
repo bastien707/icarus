@@ -1,4 +1,4 @@
-interface TransactionProps {
+interface Transaction {
   hash: string;
   from: string;
   to: string;
@@ -7,7 +7,11 @@ interface TransactionProps {
   functionName: string;
 }
 
-export const Transaction: React.FC<{ transactions: TransactionProps[] }> = ({ transactions }) => {
+interface Props {
+  transactions: Transaction[];
+}
+
+export default function Transaction ({ transactions }: Props) {
   return (
     <div className="break-words">
       {transactions.map((transaction) => (
@@ -22,5 +26,4 @@ export const Transaction: React.FC<{ transactions: TransactionProps[] }> = ({ tr
       ))}
     </div>
   );
-}
-
+};
