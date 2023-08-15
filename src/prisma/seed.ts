@@ -10,8 +10,9 @@ async function main() {
     update: {},
     create: {
       email: "test@test.com",
-      username: "Bastien",
-      password: password
+      name: "Bastien",
+      password: password,
+      ethAddress: "0x1234567890123456789012345678901234567890",
     },
   });
   console.log(user);
