@@ -1,5 +1,5 @@
 import "../globals.css";
-import { Space_Grotesk } from "@next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RegisterButton } from "@/components/ui/button/RegisterButton";
@@ -10,7 +10,6 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
