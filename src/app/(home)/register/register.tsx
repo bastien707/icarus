@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { LoginButton } from "../auth";
 import Field from "@/components/ui/form/Field";
 import { useRouter } from "next/navigation";
+import MainButton from "@/components/ui/button/mainButton";
 
 interface FormValues {
   email: string;
@@ -13,7 +14,7 @@ interface FormValues {
   [key: string]: string;
 }
 
-export default function RegisterForm({title}: {title: string}) {
+export default function RegisterForm({ title }: { title: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({
@@ -24,10 +25,34 @@ export default function RegisterForm({title}: {title: string}) {
   });
 
   const fields = [
-    { htmlFor: 'email', labelName: 'Email', type: 'email', name: 'email', placeholder: 'test@test.com' },
-    { htmlFor: 'password', labelName: 'Password', type: 'password', name: 'password', placeholder: '' },
-    { htmlFor: 'name', labelName: 'Name', type: 'text', name: 'name', placeholder: 'John Doe' },
-    { htmlFor: 'ethAddress', labelName: 'Ethereum Address', type: 'text', name: 'ethAddress', placeholder: '0x...' },
+    {
+      htmlFor: "email",
+      labelName: "Email",
+      type: "email",
+      name: "email",
+      placeholder: "test@test.com",
+    },
+    {
+      htmlFor: "password",
+      labelName: "Password",
+      type: "password",
+      name: "password",
+      placeholder: "",
+    },
+    {
+      htmlFor: "name",
+      labelName: "Name",
+      type: "text",
+      name: "name",
+      placeholder: "John Doe",
+    },
+    {
+      htmlFor: "ethAddress",
+      labelName: "Ethereum Address",
+      type: "text",
+      name: "ethAddress",
+      placeholder: "0x...",
+    },
   ];
 
   const onSubmit = async (e: FormEvent) => {
@@ -79,13 +104,10 @@ export default function RegisterForm({title}: {title: string}) {
             changeHandler={handleChange}
           />
         ))}
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 text-sm py-2">
           Have an account ? <LoginButton />
         </p>
-
-        <button disabled={loading} className="my-2">
-          {loading ? "loading..." : "Register"}
-        </button>
+        <MainButton text="Register" disabled={loading} margin="my-3"/>
       </form>
     </>
   );
