@@ -82,7 +82,7 @@ export default function LoginForm({ title }: { title: string }) {
         {error && <p className="text-red-500 text-sm py-2">{error}</p>}
         <p className="text-gray-500 text-sm py-2">
           Need to create an account ?{" "}
-          <Link href="/register" className="underline underline-offset-2">
+          <Link href={route.REGISTER} className="underline underline-offset-2">
             Register
           </Link>
         </p>
