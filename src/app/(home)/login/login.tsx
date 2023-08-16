@@ -6,6 +6,7 @@ import Field from "@/components/ui/form/Field";
 import MainButton from "@/components/ui/button/MainButton";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { route } from "@/lib/constants/route";
 
 interface FormValues {
   email: string;
@@ -15,7 +16,7 @@ interface FormValues {
 
 export default function LoginForm({ title }: { title: string }) {
   const searchParams = useSearchParams();
-  const callBackUrl = searchParams.get("callbackUrl") || "/dashboard/overview";
+  const callBackUrl = searchParams.get("callbackUrl") || route.DASHBOARD;
   const error = searchParams.get("error") ? "Invalid credentials" : "";
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({

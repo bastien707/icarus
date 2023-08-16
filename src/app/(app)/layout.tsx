@@ -4,6 +4,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -14,16 +16,18 @@ export const metadata: Metadata = {
   description: "Icarus rise finance",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+  
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <Providers>
-          <Navbar />
+          <Navbar session={session}/>
           {children}
           <Footer />
         </Providers>

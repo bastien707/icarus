@@ -1,12 +1,9 @@
 import "../globals.css";
 import { Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { RegisterButton } from "@/components/ui/button/RegisterButton";
-import { LogoutButton } from "@/components/ui/button/LogoutButton";
-import { LoginButton } from "@/components/ui/button/LoginButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { Navbar } from "@/components/Navbar";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -27,22 +24,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
-        <header
-          className="flex justify-between items-center"
-          style={{ padding: "0 1rem" }}
-        >
-          <Link href="/">Icarus</Link>
-          <nav>
-            <ul className="flex space-x-4">
-              <li>
-                {session ? <LogoutButton /> : <LoginButton />}
-                <RegisterButton />
-              </li>
-            </ul>
-          </nav>
-        </header>
+        <Navbar session={session} home />
         <h2>Icarus rise finance</h2>
-        <pre>{JSON.stringify(session)}</pre>
         {children}
       </body>
     </html>
