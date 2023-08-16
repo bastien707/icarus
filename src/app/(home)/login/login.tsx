@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { ChangeEvent, FormEvent, useState } from "react";
-import { signIn } from "next-auth/react";
-import Field from "@/components/ui/form/Field";
-import MainButton from "@/components/ui/button/MainButton";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import Field from '@/components/ui/form/Field';
+import MainButton from '@/components/ui/button/MainButton';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface FormValues {
   email: string;
@@ -15,28 +15,28 @@ interface FormValues {
 
 export default function LoginForm({ title }: { title: string }) {
   const searchParams = useSearchParams();
-  const callBackUrl = searchParams.get("callbackUrl") || "/dashboard/overview";
-  const error = searchParams.get("error") ? "Invalid credentials" : "";
+  const callBackUrl = searchParams.get('callbackUrl') || '/dashboard/overview';
+  const error = searchParams.get('error') ? 'Invalid credentials' : '';
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const fields = [
     {
-      htmlFor: "email",
-      labelName: "Email",
-      type: "email",
-      name: "email",
-      placeholder: "test@test.com",
+      htmlFor: 'email',
+      labelName: 'Email',
+      type: 'email',
+      name: 'email',
+      placeholder: 'test@test.com',
     },
     {
-      htmlFor: "password",
-      labelName: "Password",
-      type: "password",
-      name: "password",
-      placeholder: "",
+      htmlFor: 'password',
+      labelName: 'Password',
+      type: 'password',
+      name: 'password',
+      placeholder: '',
     },
   ];
 
@@ -45,7 +45,7 @@ export default function LoginForm({ title }: { title: string }) {
     setLoading(true);
 
     try {
-      signIn("credentials", {
+      signIn('credentials', {
         email: formValues.email,
         password: formValues.password,
         callbackUrl: callBackUrl,
@@ -66,7 +66,7 @@ export default function LoginForm({ title }: { title: string }) {
     <>
       <h1 className="text-2xl font-semibold">{title}</h1>
       <form onSubmit={onSubmit} className="flex flex-col">
-        {fields.map((field) => (
+        {fields.map(field => (
           <Field
             key={field.name}
             htmlFor={field.htmlFor}
@@ -80,7 +80,7 @@ export default function LoginForm({ title }: { title: string }) {
         ))}
         {error && <p className="text-red-500 text-sm py-2">{error}</p>}
         <p className="text-gray-500 text-sm py-2">
-          Need to create an account ?{" "}
+          Need to create an account ?{' '}
           <Link href="/register" className="underline underline-offset-2">
             Register
           </Link>

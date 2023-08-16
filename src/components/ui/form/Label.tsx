@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 type LabelProps = {
   labelName: string;

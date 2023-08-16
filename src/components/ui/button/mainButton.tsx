@@ -10,8 +10,8 @@ export default function MainButton({
   text,
   clickHandler,
   disabled,
-  color = "bg-icarus-yellow",
-  margin = "",
+  color = 'bg-icarus-yellow',
+  margin = '',
 }: MainButtonProps) {
   const buttonClass = `
       ${color} font-semibold py-2 px-5 border-2 duration-200 border-black 
@@ -25,11 +25,9 @@ export default function MainButton({
     <button
       disabled={disabled}
       onClick={clickHandler}
-      className={`${buttonClass} ${
-        disabled ? "opacity-50 cursor-not-allowed" : ""
-      } ${margin}`}
+      className={`${buttonClass} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${margin}`}
     >
-      {disabled ? "Loading..." : text}
+      {disabled ? 'Loading...' : text}
     </button>
   );
 }

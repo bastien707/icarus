@@ -1,5 +1,5 @@
-import RegisterForm from "./register";
-import { FormContainer } from "../formContainer";
+import RegisterForm from './register';
+import { FormContainer } from '../formContainer';
 
 export default async function SignUp() {
   return (

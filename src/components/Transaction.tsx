@@ -11,10 +11,10 @@ interface Props {
   transactions: Transaction[];
 }
 
-export default function Transaction ({ transactions }: Props) {
+export default function Transaction({ transactions }: Props) {
   return (
     <div className="break-words">
-      {transactions.map((transaction) => (
+      {transactions.map(transaction => (
         <div className="border-t-2 border-stone-900" key={transaction.hash}>
           <p>Hash: {transaction.hash}</p>
           <p>From: {transaction.from}</p>
@@ -26,4 +26,4 @@ export default function Transaction ({ transactions }: Props) {
       ))}
     </div>
   );
-};
+}
