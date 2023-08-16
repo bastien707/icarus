@@ -1,14 +1,16 @@
+"use client";
+
 import "../globals.css";
 import { Space_Grotesk } from "next/font/google";
 import Link from "next/link";
 import { route } from "@/lib/constants/route";
-import {BiChevronLeft} from "react-icons/bi";
+import { BiChevronLeft } from "react-icons/bi";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -16,8 +18,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
+        <div
+          className="w-full h-full fixed top-0 left-0 bg-no-repeat bg-cover -z-50"
+          style={{ backgroundImage: "url(/loginBackground.svg)" }}
+        ></div>
         <header className="mt-4 ml-4">
-          <Link href={route.HOME}><BiChevronLeft size={48}/></Link>
+          <Link href={route.HOME}>
+            <BiChevronLeft size={48} />
+          </Link>
         </header>
         {children}
       </body>
