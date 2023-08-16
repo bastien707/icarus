@@ -25,7 +25,6 @@ export default async function RootLayout({
     <html lang="en">
       <body className={spaceGrotesk.className}>
         <Navbar session={session} home />
-        <h2>Icarus rise finance</h2>
         {children}
       </body>
     </html>
