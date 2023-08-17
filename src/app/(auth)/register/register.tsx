@@ -1,26 +1,28 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { signIn } from 'next-auth/react';
 import Field from '@/components/ui/form/Field';
+import { useRouter } from 'next/navigation';
 import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { route } from '@/lib/constants/route';
 
 interface FormValues {
   email: string;
   password: string;
+  name: string;
+  ethAddress: string;
   [key: string]: string;
 }
 
-export default function LoginForm({ title }: { title: string }) {
-  const searchParams = useSearchParams();
-  const callBackUrl = searchParams.get('callbackUrl') || '/dashboard/overview';
-  const error = searchParams.get('error') ? 'Invalid credentials' : '';
+export default function RegisterForm({ title }: { title: string }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<FormValues>({
     email: '',
     password: '',
+    name: '',
+    ethAddress: '',
   });
 
   const fields = [
@@ -38,6 +40,20 @@ export default function LoginForm({ title }: { title: string }) {
       name: 'password',
       placeholder: '',
     },
+    {
+      htmlFor: 'name',
+      labelName: 'Name',
+      type: 'text',
+      name: 'name',
+      placeholder: 'John Doe',
+    },
+    {
+      htmlFor: 'ethAddress',
+      labelName: 'Ethereum Address',
+      type: 'text',
+      name: 'ethAddress',
+      placeholder: '0x...',
+    },
   ];
 
   const onSubmit = async (e: FormEvent) => {
@@ -45,11 +61,22 @@ export default function LoginForm({ title }: { title: string }) {
     setLoading(true);
 
     try {
-      signIn('credentials', {
-        email: formValues.email,
-        password: formValues.password,
-        callbackUrl: callBackUrl,
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify(formValues),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      setLoading(false);
+      if (!res.ok) {
+        const errorMessage = (await res.json()).message;
+        alert(errorMessage);
+        return;
+      }
+
+      router.push('/login');
     } catch (error: any) {
       setLoading(false);
       console.error(error);
@@ -78,14 +105,13 @@ export default function LoginForm({ title }: { title: string }) {
             changeHandler={handleChange}
           />
         ))}
-        {error && <p className="text-red-500 text-sm py-2">{error}</p>}
         <p className="text-gray-500 text-sm py-2">
-          Need to create an account ?{' '}
-          <Link href="/register" className="underline underline-offset-2">
-            Register
+          Have an account ?{' '}
+          <Link href={route.LOGIN} className="underline underline-offset-2">
+            Login
           </Link>
         </p>
-        <MainButton text="Log in" disabled={loading} margin="my-3" />
+        <MainButton text="Register" disabled={loading} margin="my-3" />
       </form>
     </>
   );
