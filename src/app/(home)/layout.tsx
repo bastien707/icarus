@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={spaceGrotesk.className}>
-        <Navbar session={session} home />
+        <Navbar session={session} isHome />
         {children}
       </body>
     </html>

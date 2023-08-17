@@ -20,7 +20,7 @@ export default async function transaction() {
 
   return (
     <main>
-      <p>{JSON.stringify(session)}</p>
+      {/* <p>{JSON.stringify(session)}</p> */}
       <h1 className="text-2xl">Transactions</h1>
       <Transaction transactions={data.result} />
     </main>

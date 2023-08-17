@@ -13,20 +13,20 @@ interface NavButtonProps {
   link?: string;
 }
 
-const handleLogin = (type: string) => {
-  if (type === 'login') {
-    signIn();
-  } else if (type === 'logout') {
-    signOut({ callbackUrl: route.HOME });
-  }
-};
-
 const defaultButtonClasses =
   'hover:bg-icarus-yellow font-semibold p-4 border-r-2 border-black last:border-r-0 first:border-l-2 hover:text-black';
 
 export const NavButton = ({ type, children, link }: PropsWithChildren<NavButtonProps>) => {
   const path = usePathname();
   const isCurrentPage = path === link;
+
+  const handleLogin = (type: string) => {
+    if (type === 'login') {
+      signIn();
+    } else if (type === 'logout') {
+      signOut({ callbackUrl: route.HOME });
+    }
+  };
 
   if (type === 'register') {
     return (
@@ -55,7 +55,7 @@ export const NavButton = ({ type, children, link }: PropsWithChildren<NavButtonP
   return (
     <button
       className={`${defaultButtonClasses} ${isCurrentPage ? 'bg-icarus-yellow' : ''}`}
-      onClick={() => handleLogin}
+      onClick={() => handleLogin(type)}
     >
       {type === 'login' && 'Login'}
       {type === 'logout' && 'Sign out'}
