@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { route } from '@/lib/constants/route';
 import { NavButton } from './ui/button/NavButton';
@@ -9,7 +11,7 @@ interface NavbarProps {
 
 export const Navbar = ({ session, home }: NavbarProps) => {
   return (
-    <div className={`flex h-fit items-center border-y-2 border-black justify-between`}>
+    <div className={` flex h-fit items-center border-y-2 border-black justify-between`}>
       <Link className="font-bold p-4 border-black sm:border-r-2" href={route.HOME}>
         Icarus
       </Link>
@@ -22,7 +24,7 @@ export const Navbar = ({ session, home }: NavbarProps) => {
         <div className="flex">
           {session ? (
             <>
-              <NavButton text="Go to dashboard" link={route.DASHBOARD} />
+              <NavButton link={route.DASHBOARD}>Go to dashboard</NavButton>
               <NavButton type="logout" />
             </>
           ) : (
@@ -36,9 +38,9 @@ export const Navbar = ({ session, home }: NavbarProps) => {
         <div className="flex">
           {session && (
             <>
-              <NavButton text="Dashboard" link={route.DASHBOARD} />
-              <NavButton text="Transactions" link={route.TRANSACTIONS} />
-              <NavButton text="Tokens" link={route.TOKENS} />
+              <NavButton link={route.DASHBOARD}>Dashboard</NavButton>
+              <NavButton link={route.TRANSACTIONS}>Transactions</NavButton>
+              <NavButton link={route.TOKENS}>Tokens</NavButton>
             </>
           )}
         </div>
