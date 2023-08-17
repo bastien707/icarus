@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import { LogoutButton } from './ui/button/LogoutButton';
-import { RegisterButton } from './ui/button/RegisterButton';
-import { LoginButton } from './ui/button/LoginButton';
 import { route } from '@/lib/constants/route';
+import { NavButton } from './ui/button/NavButton';
 
 interface NavbarProps {
   session?: any;
@@ -11,32 +9,36 @@ interface NavbarProps {
 
 export const Navbar = ({ session, home }: NavbarProps) => {
   return (
-    <div className={`flex h-8 gap-16 m-2 items-center ${home && 'justify-between'}`}>
-      <Link className="text-xl font-bold" href={route.HOME}>
+    <div className={`flex h-fit items-center border-y-2 border-black justify-between`}>
+      <Link className="font-bold p-4 border-black sm:border-r-2" href={route.HOME}>
         Icarus
       </Link>
+      <div>
+        <p className="flex capitalize font-semibold">
+          {session ? `Welcome, ${session.user.name}` : 'Welcome on Icarus !'}
+        </p>
+      </div>
       {home ? (
-        <div className="flex gap-10">
+        <div className="flex">
           {session ? (
             <>
-              <Link href={route.DASHBOARD}>My dashboard</Link>
-              <LogoutButton />
+              <NavButton text="Go to dashboard" link={route.DASHBOARD} />
+              <NavButton type="logout" />
             </>
           ) : (
             <>
-              <RegisterButton />
-              <LoginButton />
+              <NavButton type="login" />
+              <NavButton type="register" />
             </>
           )}
         </div>
       ) : (
-        <div className="flex gap-10">
+        <div className="flex">
           {session && (
             <>
-              <Link href={route.DASHBOARD}>overview</Link>
-              <Link href={route.TRANSACTIONS}>transactions</Link>
-              <Link href={route.TOKENS}>tokens</Link>
-              <LogoutButton />
+              <NavButton text="Dashboard" link={route.DASHBOARD} />
+              <NavButton text="Transactions" link={route.TRANSACTIONS} />
+              <NavButton text="Tokens" link={route.TOKENS} />
             </>
           )}
         </div>

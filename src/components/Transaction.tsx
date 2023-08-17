@@ -1,20 +1,20 @@
-interface Transaction {
+type Transaction = {
   hash: string;
   from: string;
   to: string;
   timeStamp: string;
   value: number;
   functionName: string;
-}
+};
 
 interface Props {
   transactions: Transaction[];
 }
 
-export default function Transaction({ transactions }: Props) {
+export default async function Transaction({ transactions }: Props) {
   return (
     <div className="break-words">
-      {transactions.map(transaction => (
+      {transactions?.map(transaction => (
         <div className="border-t-2 border-stone-900" key={transaction.hash}>
           <p>Hash: {transaction.hash}</p>
           <p>From: {transaction.from}</p>
