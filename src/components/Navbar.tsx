@@ -18,7 +18,7 @@ export const Navbar = ({ session, isHome }: NavbarProps) => {
       </Link>
       <div>
         <p className="flex capitalize font-semibold">
-          {session ? `Welcome, ${session.user?.name}` : 'Welcome on Icarus !'}
+          {session ? `Welcome ${session.user?.name}` : 'Welcome on Icarus !'}
         </p>
       </div>
       <div className="flex">
@@ -38,8 +38,6 @@ export const Navbar = ({ session, isHome }: NavbarProps) => {
           session && (
             <>
               <NavButton link={route.DASHBOARD}>Dashboard</NavButton>
-              <NavButton link={route.TRANSACTIONS}>Transactions</NavButton>
-              <NavButton link={route.TOKENS}>Tokens</NavButton>
             </>
           )
         )}

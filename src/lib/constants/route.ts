@@ -5,4 +5,5 @@ export const route = {
   TOKENS: '/dashboard/tokens',
   LOGIN: '/login',
   REGISTER: '/register',
+  LOGINBACKGROUND: '/loginBackground.svg',
 };
