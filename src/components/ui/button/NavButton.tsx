@@ -1,7 +1,7 @@
 'use client';
 
 import { signOut, signIn } from 'next-auth/react';
-import { route } from '@/lib/constants/route';
+import { route } from '@/lib/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';

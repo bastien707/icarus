@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
-import { hash } from "bcrypt";
-import { NextResponse } from "next/server";
-import { isValidEthAddress } from "@/lib/utils/ethRegex";
+import { prisma } from '@/lib/prisma';
+import { hash } from 'bcrypt';
+import { NextResponse } from 'next/server';
+import { isValidEthAddress } from '@/lib/utils';
 
 export async function POST(req: Request) {
   try {
@@ -14,13 +14,13 @@ export async function POST(req: Request) {
     const hashed_password = await hash(password, 12);
 
     if (!isValidEthAddress(ethAddress)) {
-        return new NextResponse(
-            JSON.stringify({
-                status: "error",
-                message: "Invalid ETH address",
-            }),
-            { status: 400 }
-        );
+      return new NextResponse(
+        JSON.stringify({
+          status: 'error',
+          message: 'Invalid ETH address',
+        }),
+        { status: 400 },
+      );
     }
 
     const user = await prisma.user.create({
@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-      status: "success",
-      message: "User created",
+      status: 'success',
+      message: 'User created',
       user: {
         id: user.id,
         email: user.email,
@@ -45,10 +45,10 @@ export async function POST(req: Request) {
   } catch (error: any) {
     return new NextResponse(
       JSON.stringify({
-        status: "error",
+        status: 'error',
         message: error.message,
       }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

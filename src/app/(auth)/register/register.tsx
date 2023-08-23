@@ -5,7 +5,7 @@ import Field from '@/components/ui/form/Field';
 import { useRouter } from 'next/navigation';
 import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
-import { route } from '@/lib/constants/route';
+import { route } from '@/lib/constants';
 
 interface FormValues {
   email: string;

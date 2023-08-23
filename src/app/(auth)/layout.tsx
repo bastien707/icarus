@@ -3,7 +3,7 @@
 import '../globals.css';
 import { Space_Grotesk } from 'next/font/google';
 import Link from 'next/link';
-import { route } from '@/lib/constants/route';
+import { route } from '@/lib/constants';
 import { BiChevronLeft } from 'react-icons/bi';
 
 const spaceGrotesk = Space_Grotesk({

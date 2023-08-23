@@ -1,7 +1,12 @@
 import { prisma } from '@/lib/prisma';
 import { compare } from 'bcrypt';
+import { Session } from 'next-auth';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+
+export interface CustomSession extends Session {
+  ethAddress: string;
+}
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -56,8 +61,8 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.id,
-          ethAddress: token.ethAddress,
         },
+        ethAddress: token.ethAddress,
       };
     },
     jwt: ({ token, user }) => {

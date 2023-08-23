@@ -6,7 +6,7 @@ import Field from '@/components/ui/form/Field';
 import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { route } from '@/lib/constants/route';
+import { route } from '@/lib/constants';
 
 interface FormValues {
   email: string;

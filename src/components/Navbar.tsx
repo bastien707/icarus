@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { route } from '@/lib/constants/route';
+import { route } from '@/lib/constants';
 import { NavButton } from './ui/button/NavButton';
 import { Session } from 'next-auth';
 
