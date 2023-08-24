@@ -34,3 +34,14 @@ export const wallet_name = {
 export const contract = {
   UOS: '0xD13c7342e1ef687C5ad21b27c2b65D772cAb5C8c',
 };
+
+export const url = {
+  BASE_URL: 'http://localhost:3000/',
+  API_URL: 'http://localhost:3000/api/',
+  API_URL_BALANCE: 'http://localhost:3000/api/balance',
+  API_URL_TRANSACTIONS: 'http://localhost:3000/api/transactions',
+};
+
+export const offset = {
+  TRANSACTIONS: 5,
+};
