@@ -3,12 +3,7 @@
 import Link from 'next/link';
 import { route } from '@/lib/constants';
 import { NavButton } from './ui/button/NavButton';
-import { Session } from 'next-auth';
-
-interface NavbarProps {
-  session: Session | null;
-  isHome?: boolean;
-}
+import type { NavbarProps } from '@/app/types/NavBar';
 
 export const Navbar = ({ session, isHome }: NavbarProps) => {
   return (

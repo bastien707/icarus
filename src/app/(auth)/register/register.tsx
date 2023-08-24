@@ -6,19 +6,12 @@ import { useRouter } from 'next/navigation';
 import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
 import { route } from '@/lib/constants';
-
-interface FormValues {
-  email: string;
-  password: string;
-  name: string;
-  ethAddress: string;
-  [key: string]: string;
-}
+import type { RegisterForm } from '@/app/types/Form';
 
 export default function RegisterForm({ title }: { title: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formValues, setFormValues] = useState<FormValues>({
+  const [formValues, setFormValues] = useState<RegisterForm>({
     email: '',
     password: '',
     name: '',

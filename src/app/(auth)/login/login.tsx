@@ -7,19 +7,14 @@ import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { route } from '@/lib/constants';
-
-interface FormValues {
-  email: string;
-  password: string;
-  [key: string]: string;
-}
+import type { LoginForm } from '@/app/types/Form';
 
 export default function LoginForm({ title }: { title: string }) {
   const searchParams = useSearchParams();
   const callBackUrl = searchParams.get('callbackUrl') || route.DASHBOARD;
   const error = searchParams.get('error') ? 'Invalid credentials' : '';
   const [loading, setLoading] = useState(false);
-  const [formValues, setFormValues] = useState<FormValues>({
+  const [formValues, setFormValues] = useState<LoginForm>({
     email: '',
     password: '',
   });
