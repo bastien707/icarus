@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   try {
     const { ethAddress } = (await req.json()) as { ethAddress: string };
     const balance = await fetch(
-      `https://api.etherscan.io/api?module=account&action=balance&address=${ethAddress}&tag=latest&apikey=${process.env.ETHERSCAN_API_KEY}`,
+      `${process.env.ETHERSCAN_BASE_URL}?module=account&action=balance&address=${ethAddress}&tag=latest&apikey=${process.env.ETHERSCAN_API_KEY}`,
     );
 
     const data = await balance.json();

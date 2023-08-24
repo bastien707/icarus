@@ -12,8 +12,9 @@ export async function POST(req: Request) {
       ethAddress: string;
     };
     const hashed_password = await hash(password, 12);
+    const lowerCaseEthAddress = ethAddress.toLowerCase();
 
-    if (!isValidEthAddress(ethAddress)) {
+    if (!isValidEthAddress(lowerCaseEthAddress)) {
       return new NextResponse(
         JSON.stringify({
           status: 'error',
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
         email,
         password: hashed_password,
         name,
-        ethAddress,
+        ethAddress: lowerCaseEthAddress,
       },
     });
 
