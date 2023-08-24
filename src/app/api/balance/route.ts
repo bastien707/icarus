@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { toEth } from '@/lib/utils';
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       status: 'success',
       message: 'Balance fetched',
-      balance: data.result,
+      balance: toEth(data.result),
     });
   } catch (error) {
     return new NextResponse(

@@ -1,13 +1,14 @@
 import { timeStampToDateTime, toEth } from '@/lib/utils';
 import { NextResponse } from 'next/server';
 import type { Transaction } from '@/app/types/Transaction';
-import { regex } from '@/lib/constants';
+import { regex, offset } from '@/lib/constants';
 
 export async function POST(req: Request) {
   try {
-    const { ethAddress } = (await req.json()) as { ethAddress: string };
+    const { ethAddress, page } = (await req.json()) as { ethAddress: string; page: number };
+
     const transactions = await fetch(
-      `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=1&offset=50&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
+      `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
     );
 
     const data = await transactions.json();
