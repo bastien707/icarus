@@ -1,11 +1,11 @@
 'use client';
 
+import { Pagination } from './Pagination';
 import type { Transaction } from '@/app/types/Transaction';
 import { CustomSession } from '@/app/types/Sessions';
 import { fetchTransaction } from '@/app/services/transactionService';
 import { useEffect, useState } from 'react';
 import { isKnownWallet } from '@/lib/utils';
-import { offset } from '@/lib/constants';
 
 interface Props {
   session: CustomSession | null;
@@ -14,7 +14,6 @@ interface Props {
 export function Transaction({ session }: Props) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [page, setPage] = useState(1);
-  const [lastpage, setLastPage] = useState(0);
   const [loader, setLoader] = useState(false);
   const ethAddress = session?.ethAddress;
 
@@ -36,30 +35,9 @@ export function Transaction({ session }: Props) {
   return (
     <>
       <div className="flex items-center">
-        <button
-          disabled={loader}
-          className={`px-4 py-2 ${loader ? 'cursor-not-allowed' : ''}`}
-          onClick={() => {
-            if (page > 1) {
-              setPage(page - 1);
-            }
-          }}
-        >
-          -
-        </button>
-        <p>{page}</p>
-        <button
-          disabled={loader || transactions.length < offset.TRANSACTIONS}
-          className={`px-4 py-2 ${loader || transactions.length < offset.TRANSACTIONS ? 'cursor-not-allowed' : ''}`}
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        >
-          +
-        </button>
+        <h2 className="text-2xl font-bold">Transactions</h2>
+        <Pagination loader={loader} page={page} setPage={setPage} txLength={transactions.length} />
       </div>
-
-      <h2 className="text-2xl font-bold">Transactions</h2>
       <ul>
         {transactions.map((transaction: Transaction) => {
           return (
