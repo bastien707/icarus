@@ -6,7 +6,14 @@ import { useRouter } from 'next/navigation';
 import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
 import { route } from '@/lib/constants';
-import type { RegisterForm } from '@/app/types/Form';
+
+interface RegisterForm {
+  email: string;
+  password: string;
+  name: string;
+  ethAddress: string;
+  [key: string]: string;
+}
 
 export default function RegisterForm({ title }: { title: string }) {
   const router = useRouter();

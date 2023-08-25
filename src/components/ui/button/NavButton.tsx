@@ -5,7 +5,13 @@ import { route } from '@/lib/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';
-import type { NavButtonProps } from '@/app/types/Button';
+
+export type ButtonType = 'login' | 'logout' | 'register';
+
+interface NavButtonProps {
+  type?: ButtonType;
+  link?: string;
+}
 
 const defaultButtonClasses =
   'hover:bg-icarus-yellow font-semibold p-4 border-r-2 border-black last:border-r-0 first:border-l-2 hover:text-black';

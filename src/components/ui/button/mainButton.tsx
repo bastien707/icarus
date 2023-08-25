@@ -1,4 +1,10 @@
-import type { MainButtonProps } from '@/app/types/Button';
+interface MainButtonProps {
+  text: string;
+  clickHandler?: () => void;
+  disabled?: boolean;
+  color?: string;
+  margin?: string;
+}
 
 export default function MainButton({
   text,

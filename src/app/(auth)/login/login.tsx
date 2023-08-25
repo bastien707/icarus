@@ -7,7 +7,12 @@ import MainButton from '@/components/ui/button/MainButton';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { route } from '@/lib/constants';
-import type { LoginForm } from '@/app/types/Form';
+
+interface LoginForm {
+  email: string;
+  password: string;
+  [key: string]: string;
+}
 
 export default function LoginForm({ title }: { title: string }) {
   const searchParams = useSearchParams();
