@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en">
+    <html lang="en" className="w-fit sm:w-auto">
       <body className={spaceGrotesk.className}>
         <Providers>
           <Navbar session={session} />

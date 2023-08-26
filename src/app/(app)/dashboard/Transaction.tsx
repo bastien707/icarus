@@ -6,6 +6,7 @@ import { CustomSession } from '@/app/types/Sessions';
 import { fetchTransaction } from '@/app/services/transactionService';
 import { useEffect, useState } from 'react';
 import { isKnownWallet } from '@/lib/utils';
+import MidTitle from '@/components/ui/title/midTitle';
 
 interface Props {
   session: CustomSession | null;
@@ -35,7 +36,7 @@ export function Transaction({ session }: Props) {
   return (
     <>
       <div className="flex items-center">
-        <h2 className="text-2xl font-bold">Transactions</h2>
+        <MidTitle title="Your last transactions" />
         <Pagination loader={loader} page={page} setPage={setPage} txLength={transactions.length} />
       </div>
       <ul>

@@ -12,9 +12,18 @@ export default async function Dashboard() {
 
     return (
       <main>
-        <BigTitle title="Dashboard" />
-        <p>Balance: {balance} ETH</p>
-        <Transaction session={session} />
+        <div className="sm:grid sm:grid-cols-2 text-center">
+          <BigTitle title="Dashboard" />
+          <p className="font-bold">Balance: {balance.toPrecision(4)} ETH</p>
+        </div>
+        <div className="grid sm:grid-cols-2">
+          <div className="border-r-2 border-black">
+            <Transaction session={session} />
+          </div>
+          <div>
+            <p>TODO</p>
+          </div>
+        </div>
       </main>
     );
   } catch (error) {
