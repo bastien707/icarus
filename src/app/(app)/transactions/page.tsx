@@ -1,5 +1,5 @@
 import { Transaction } from './Transaction';
-import BigTitle from '@/components/ui/title/bigTitle';
+import BigTitle from '@/components/ui/title/BigTitle';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { fetchBalance } from '@/app/services/balanceService';
@@ -13,7 +13,7 @@ export default async function Transactions() {
     return (
       <main>
         <div className="text-center">
-          <BigTitle title="Transactions" />
+          <BigTitle>Transactions</BigTitle>
           <p className="font-bold border-b-2 border-black">Balance: {balance.toPrecision(4)} ETH</p>
         </div>
         <div>

@@ -1,5 +1,5 @@
-import LoginForm from './login';
-import { FormContainer } from '../../../components/ui/form/formContainer';
+import LoginForm from './Login';
+import { FormContainer } from '../../../components/ui/form/FormContainer';
 
 export default async function Login() {
   return (

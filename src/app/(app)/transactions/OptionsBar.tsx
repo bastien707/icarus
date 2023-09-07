@@ -1,7 +1,7 @@
 'use client';
 
-import MidTitle from '@/components/ui/title/midTitle';
-import { DropdownTx } from './../../../components/ui/dropdown/dropdownTx';
+import MidTitle from '@/components/ui/title/MidTitle';
+import { DropdownTx } from '../../../components/ui/dropdown/DropdownTx';
 import { Pagination } from './Pagination';
 import list from '@/components/ui/dropdown/dropdownOptions.json';
 

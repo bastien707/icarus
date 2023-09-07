@@ -1,4 +1,4 @@
-import BigTitle from '@/components/ui/title/bigTitle';
+import BigTitle from '@/components/ui/title/BigTitle';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { fetchBalance } from '@/app/services/balanceService';
@@ -12,7 +12,7 @@ export default async function Dashboard() {
     return (
       <main>
         <div className="sm:grid sm:grid-cols-2 text-center">
-          <BigTitle title="Dashboard" />
+          <BigTitle>Dashboard</BigTitle>
           <p className="font-bold">Balance: {balance.toPrecision(4)} ETH</p>
         </div>
         <div className="grid sm:grid-cols-2">
