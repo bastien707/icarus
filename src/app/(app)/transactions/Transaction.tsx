@@ -42,18 +42,21 @@ export function Transaction({ session }: Props) {
   const ethAddress = session?.ethAddress;
 
   useEffect(() => {
-    setLoader(true);
-    if (session) {
-      fetchTransaction(session, page, selected)
-        .then(transactions => {
-          setTransactions(transactions);
-          setLoader(false);
-        })
-        .catch(error => {
-          console.error('Error fetching transactions:', error);
-          setLoader(false);
-        });
+    async function fetchTransactions() {
+      setLoader(true);
+      try {
+        if (session) {
+          const fetchedTransactions = await fetchTransaction(session, page, selected);
+          setTransactions(fetchedTransactions);
+        }
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      } finally {
+        setLoader(false);
+      }
     }
+
+    fetchTransactions();
   }, [session, page, selected]);
 
   return (
@@ -64,7 +67,7 @@ export function Transaction({ session }: Props) {
       <ul>
         {transactions.map((transaction: Transaction) => {
           return (
-            <li className="border-b-2 border-black first:border-t-2" key={transaction.hash}>
+            <li className="border-b-2 border-black" key={transaction.hash}>
               <a
                 className="font-medium hover:underline underline-offset-4 duration-300"
                 href={`https://etherscan.io/tx/${transaction.hash}`}

@@ -1,57 +1,21 @@
-import { timeStampToDateTime, toEth } from '@/lib/utils';
 import { NextResponse } from 'next/server';
 import type { Transaction } from '@/app/types/Transaction';
-import { regex, offset } from '@/lib/constants';
+import { createCustomTransaction, generateTransactionApiUrl } from '@/lib/utils/api/transactions';
+
+type RequestBody = {
+  ethAddress: string;
+  page: number;
+  selected: string;
+};
 
 export async function POST(req: Request) {
   try {
-    const { ethAddress, page, selected } = (await req.json()) as { ethAddress: string; page: number; selected: string };
-
-    let transactions;
-    switch (selected) {
-      case 'Normal':
-        transactions = await fetch(
-          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
-        );
-        break;
-      case 'Internal':
-        transactions = await fetch(
-          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlistinternal&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
-        );
-        break;
-      default:
-        transactions = await fetch(
-          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
-        );
-        break;
-    }
-
+    const { ethAddress, page, selected }: RequestBody = await req.json();
+    const url = generateTransactionApiUrl(ethAddress, page, selected);
+    const transactions = await fetch(url);
     const data = await transactions.json();
 
-    const customTransaction: Transaction[] = data.result.map((transaction: Transaction) => {
-      const totalGasCostEther = toEth(transaction.gasUsed * parseInt(transaction.gasPrice, 10));
-      let functionName: RegExpExecArray | null = null;
-      if (typeof transaction.functionName === 'string') {
-        functionName = regex.FIRSTWORD.exec(transaction.functionName);
-      }
-      const dateTime = timeStampToDateTime(transaction.timeStamp);
-
-      const tx: Transaction = {
-        hash: transaction.hash,
-        value: toEth(transaction.value),
-        timeStamp: transaction.timeStamp,
-        from: transaction.from,
-        to: transaction.to,
-        functionName,
-        gasUsed: transaction.gasUsed,
-        gasPrice: transaction.gasPrice,
-        totalGasCostEther,
-        dateTime,
-      };
-
-      return tx;
-    });
-
+    const customTransaction: Transaction[] = createCustomTransaction(data);
     return NextResponse.json({
       status: 'success',
       message: 'Transactions fetched',
@@ -63,7 +27,7 @@ export async function POST(req: Request) {
         status: 'error',
         message: 'Something went wrong while fetching transactions',
       }),
-      { status: 400 },
+      { status: 500 },
     );
   }
 }
