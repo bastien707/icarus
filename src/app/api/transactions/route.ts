@@ -5,11 +5,26 @@ import { regex, offset } from '@/lib/constants';
 
 export async function POST(req: Request) {
   try {
-    const { ethAddress, page } = (await req.json()) as { ethAddress: string; page: number };
+    const { ethAddress, page, selected } = (await req.json()) as { ethAddress: string; page: number; selected: string };
 
-    const transactions = await fetch(
-      `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
-    );
+    let transactions;
+    switch (selected) {
+      case 'Normal':
+        transactions = await fetch(
+          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
+        );
+        break;
+      case 'Internal':
+        transactions = await fetch(
+          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlistinternal&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
+        );
+        break;
+      default:
+        transactions = await fetch(
+          `${process.env.ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=${page}&offset=${offset.TRANSACTIONS}&sort=desc&apikey=${process.env.ETHERSCAN_API_KEY}}`,
+        );
+        break;
+    }
 
     const data = await transactions.json();
 

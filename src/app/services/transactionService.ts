@@ -2,11 +2,15 @@ import { CustomSession } from '../types/Sessions';
 import { Transaction } from '../types/Transaction';
 import { url } from '@/lib/constants';
 
-export async function fetchTransaction(session: CustomSession | null, page = 1): Promise<Transaction[]> {
+export async function fetchTransaction(
+  session: CustomSession | null,
+  page = 1,
+  selected: string,
+): Promise<Transaction[]> {
   try {
     const res = await fetch(url.API_URL_TRANSACTIONS, {
       method: 'POST',
-      body: JSON.stringify({ ethAddress: session?.ethAddress, page: page }),
+      body: JSON.stringify({ ethAddress: session?.ethAddress, page: page, selected: selected }),
     });
 
     if (!res.ok) {

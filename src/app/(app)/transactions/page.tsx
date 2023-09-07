@@ -1,23 +1,24 @@
+import { Transaction } from './Transaction';
 import BigTitle from '@/components/ui/title/bigTitle';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { fetchBalance } from '@/app/services/balanceService';
 import type { CustomSession } from '@/app/types/Sessions';
 
-export default async function Dashboard() {
+export default async function Transactions() {
   try {
     const session: CustomSession | null = await getServerSession(authOptions);
     const balance = await fetchBalance(session);
 
     return (
       <main>
-        <div className="sm:grid sm:grid-cols-2 text-center">
-          <BigTitle title="Dashboard" />
-          <p className="font-bold">Balance: {balance.toPrecision(4)} ETH</p>
+        <div className="text-center">
+          <BigTitle title="Transactions" />
+          <p className="font-bold border-b-2 border-black">Balance: {balance.toPrecision(4)} ETH</p>
         </div>
-        <div className="grid sm:grid-cols-2">
+        <div>
           <div>
-            <p>TODO</p>
+            <Transaction session={session} />
           </div>
         </div>
       </main>

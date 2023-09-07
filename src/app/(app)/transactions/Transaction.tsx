@@ -1,27 +1,50 @@
 'use client';
 
-import { Pagination } from './Pagination';
 import type { Transaction } from '@/app/types/Transaction';
 import { CustomSession } from '@/app/types/Sessions';
 import { fetchTransaction } from '@/app/services/transactionService';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { isKnownWallet } from '@/lib/utils';
-import MidTitle from '@/components/ui/title/midTitle';
+import { OptionBar } from './OptionsBar';
 
 interface Props {
   session: CustomSession | null;
 }
 
+type TransactionContextType = {
+  setPage: (page: number) => void;
+  page: number;
+  loader: boolean;
+  transactions: Transaction[];
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: (isDropdownOpen: boolean) => void;
+  selected: string;
+  setSelected: (selected: string) => void;
+};
+
+export const TransactionContext = createContext<TransactionContextType>({
+  setPage: () => {},
+  page: 1,
+  loader: false,
+  transactions: [],
+  isDropdownOpen: false,
+  setIsDropdownOpen: () => {},
+  selected: 'Normal',
+  setSelected: () => {},
+});
+
 export function Transaction({ session }: Props) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selected, setSelected] = useState('Normal');
   const ethAddress = session?.ethAddress;
 
   useEffect(() => {
     setLoader(true);
     if (session) {
-      fetchTransaction(session, page)
+      fetchTransaction(session, page, selected)
         .then(transactions => {
           setTransactions(transactions);
           setLoader(false);
@@ -31,14 +54,13 @@ export function Transaction({ session }: Props) {
           setLoader(false);
         });
     }
-  }, [session, page]);
+  }, [session, page, selected]);
 
   return (
-    <>
-      <div className="flex items-center">
-        <MidTitle title="Your last transactions" />
-        <Pagination loader={loader} page={page} setPage={setPage} txLength={transactions.length} />
-      </div>
+    <TransactionContext.Provider
+      value={{ setPage, page, loader, transactions, isDropdownOpen, setIsDropdownOpen, selected, setSelected }}
+    >
+      <OptionBar />
       <ul>
         {transactions.map((transaction: Transaction) => {
           return (
@@ -68,6 +90,6 @@ export function Transaction({ session }: Props) {
           );
         })}
       </ul>
-    </>
+    </TransactionContext.Provider>
   );
 }
