@@ -1,5 +1,5 @@
-import RegisterForm from './register';
-import { FormContainer } from '../../../components/ui/form/formContainer';
+import RegisterForm from './Register';
+import { FormContainer } from '../../../components/ui/form/FormContainer';
 
 export default async function SignUp() {
   return (
