@@ -6,11 +6,12 @@ export async function fetchTransaction(
   session: CustomSession | null,
   page = 1,
   selected: string,
+  research?: string,
 ): Promise<Transaction[]> {
   try {
     const res = await fetch(url.API_URL_TRANSACTIONS, {
       method: 'POST',
-      body: JSON.stringify({ ethAddress: session?.ethAddress, page: page, selected: selected }),
+      body: JSON.stringify({ ethAddress: session?.ethAddress, page: page, selected: selected, research: research }),
     });
 
     if (!res.ok) {

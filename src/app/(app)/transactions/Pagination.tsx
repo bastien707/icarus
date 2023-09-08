@@ -1,6 +1,5 @@
 'use client';
 
-import { DropdownTx } from '../../../components/ui/dropdown/DropdownTx';
 import { offset } from '@/lib/constants';
 import { useContext } from 'react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
@@ -8,7 +7,6 @@ import { TransactionContext } from './Transaction';
 
 export function Pagination() {
   const { page, loader, setPage, transactions } = useContext(TransactionContext);
-
   const txLength = transactions.length;
 
   return (

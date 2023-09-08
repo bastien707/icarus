@@ -1,25 +1,24 @@
 'use client';
 
-import { ChangeEvent } from 'react';
-
-interface InputProps {
-  type: string;
-  name: string;
-  value: string;
-  placeholder: string;
-  changeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-}
-
-export default function Input({ type, name, value, placeholder, changeHandler }: InputProps) {
+export default function Input({
+  type,
+  name,
+  value,
+  placeholder,
+  onChange,
+  className,
+}: React.ComponentPropsWithoutRef<'input'>) {
+  const standardClass =
+    'p-2 block w-full focus:outline-none ring-black focus:ring-1 focus:border-black shadow-sm sm:text-sm border-black border-2';
   return (
     <input
       required
       type={type}
       name={name}
       value={value}
-      onChange={changeHandler}
+      onChange={onChange}
       placeholder={placeholder}
-      className="p-2 block w-full focus:outline-none ring-black focus:ring-1 focus:border-black shadow-sm sm:text-sm border-slate-800 border-2"
+      className={`${standardClass} ${className}`}
     />
   );
 }

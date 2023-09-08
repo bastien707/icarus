@@ -20,6 +20,9 @@ type TransactionContextType = {
   setIsDropdownOpen: (isDropdownOpen: boolean) => void;
   selected: string;
   setSelected: (selected: string) => void;
+  search: string;
+  setSearch: (search: string) => void;
+  setResearch: (research: string) => void;
 };
 
 export const TransactionContext = createContext<TransactionContextType>({
@@ -31,6 +34,9 @@ export const TransactionContext = createContext<TransactionContextType>({
   setIsDropdownOpen: () => {},
   selected: 'Normal',
   setSelected: () => {},
+  search: '',
+  setSearch: () => {},
+  setResearch: () => {},
 });
 
 export function Transaction({ session }: Props) {
@@ -39,31 +45,56 @@ export function Transaction({ session }: Props) {
   const [loader, setLoader] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selected, setSelected] = useState('Normal');
+  const [search, setSearch] = useState('');
+  const [research, setResearch] = useState('');
+  const [notFound, setNotFound] = useState(false);
   const ethAddress = session?.ethAddress;
 
-  useEffect(() => {
-    async function fetchTransactions() {
-      setLoader(true);
-      try {
-        if (session) {
-          const fetchedTransactions = await fetchTransaction(session, page, selected);
-          setTransactions(fetchedTransactions);
+  const fetchTransactions = async () => {
+    setLoader(true);
+    setNotFound(false);
+    try {
+      if (session) {
+        const fetchedTransactions = await fetchTransaction(session, page, selected, search);
+        if (fetchedTransactions.length === 0) {
+          setNotFound(true);
         }
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-      } finally {
-        setLoader(false);
+        setTransactions(fetchedTransactions);
       }
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+    } finally {
+      setLoader(false);
     }
+  };
 
+  useEffect(() => {
     fetchTransactions();
-  }, [session, page, selected]);
+  }, [session, page, selected, research]);
 
   return (
     <TransactionContext.Provider
-      value={{ setPage, page, loader, transactions, isDropdownOpen, setIsDropdownOpen, selected, setSelected }}
+      value={{
+        setPage,
+        page,
+        loader,
+        transactions,
+        isDropdownOpen,
+        setIsDropdownOpen,
+        selected,
+        setSelected,
+        search,
+        setSearch,
+        setResearch,
+      }}
     >
       <OptionBar />
+
+      {notFound && (
+        <p className="flex text-center text-8xl font-bold  items-center justify-center h-screen bg-red-200">
+          No transactions found
+        </p>
+      )}
       <ul>
         {transactions.map((transaction: Transaction) => {
           return (

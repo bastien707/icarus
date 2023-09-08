@@ -23,11 +23,11 @@ export function DropdownTx({ list }: DropdownTxProps) {
       onMouseEnter={() => setIsDropdownOpen(!isDropdownOpen)}
       onMouseLeave={() => setIsDropdownOpen(!isDropdownOpen)}
     >
-      <div className="flex border-l-2 border-black font-bold">
+      <div className="flex font-bold">
         <button className="w-32 transition-transform duration-300 hover:transform">
           <span>{selected}</span>
         </button>
-        <span className="p-2 border-x-2 border-black">
+        <span className="py-2 px-4">
           <BiChevronDown
             size={32}
             className={`transition-transform duration-300 ${!isDropdownOpen ? 'rotate-180' : ''}`}
@@ -36,14 +36,12 @@ export function DropdownTx({ list }: DropdownTxProps) {
       </div>
 
       {isDropdownOpen && (
-        <div className="absolute flex border-x-2 border-b-2 border-black flex-col bg-icarus-white">
+        <div className="absolute flex flex-col bg-icarus-white">
           {list.map((item, index) => {
             return (
               <button
                 key={index}
-                className={`p-2 w-32 hover:bg-icarus-yellow border-t-2 border-black hover:font-bold duration-300 ${
-                  selected === item.name && 'bg-icarus-yellow'
-                }`}
+                className={`p-2 w-32 hover:bg-icarus-yellow border-2 border-black first:border-b-0 hover:font-bold duration-300`}
                 onClick={() => handleClick(item.name)}
               >
                 {item.name}

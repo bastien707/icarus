@@ -111,7 +111,9 @@ export default function RegisterForm({ title }: { title: string }) {
             Login
           </Link>
         </p>
-        <MainButton text="Register" disabled={loading} margin="my-3" />
+        <MainButton disabled={loading} className="my-3 font-semibold py-2 px-5 border-2 border-black">
+          Register
+        </MainButton>
       </form>
     </>
   );

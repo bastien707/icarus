@@ -86,7 +86,9 @@ export default function LoginForm({ title }: { title: string }) {
             Register
           </Link>
         </p>
-        <MainButton text="Log in" disabled={loading} margin="my-3" />
+        <MainButton disabled={loading} className="my-3 font-semibold py-2 px-5 border-2 border-black">
+          Log in
+        </MainButton>
       </form>
     </>
   );

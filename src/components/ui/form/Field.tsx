@@ -18,7 +18,7 @@ export default function Field({ labelName, htmlFor, type, name, value, placehold
   return (
     <div className="mt-4">
       <Label labelName={labelName} htmlFor={htmlFor} />
-      <Input type={type} name={name} value={value} placeholder={placeholder} changeHandler={changeHandler} />
+      <Input type={type} name={name} value={value} placeholder={placeholder} onChange={changeHandler} />
     </div>
   );
 }
