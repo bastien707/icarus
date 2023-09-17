@@ -6,7 +6,6 @@ export function generateTransactionApiUrl(ethAddress: string, page: number, sele
   const baseUrl = process.env.ETHERSCAN_BASE_URL;
   const apiKey = process.env.ETHERSCAN_API_KEY;
   const module = 'account';
-  console.log('SEARCH:    ', research);
 
   if (research && research !== '' && isValidEthAddress(research)) {
     const queryParameters: URLSearchParams = new URLSearchParams({
