@@ -8,7 +8,7 @@ import type { CustomSession } from '@/app/types/Sessions';
 export default async function Transactions() {
   try {
     const session: CustomSession | null = await getServerSession(authOptions);
-    const balance = await fetchBalance(session);
+    const balance = await fetchBalance();
 
     return (
       <main>
