@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚧 This project is in work in progress
+# Icarus
+Icarus Rise Finance : browse better, for better performance
+
+# Preview
+## Login
+<img width="1416" alt="login" src="https://github.com/bastien707/icarus/assets/73294817/b9a360ef-e645-4fa8-91dd-dc60f2e753a7">
+
+## Transaction
+<img width="1419" alt="transactions" src="https://github.com/bastien707/icarus/assets/73294817/50401797-636e-4252-a646-1b9e8c2c8d51">
+
+
+
 
 ## Getting Started
 
@@ -18,17 +30,3 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
