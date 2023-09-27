@@ -38,6 +38,7 @@ export const Navbar = ({ session, isHome }: NavbarProps) => {
           session && (
             <>
               <NavButton link={route.DASHBOARD}>Dashboard</NavButton>
+              <NavButton link={route.TRANSACTIONS}>Transactions</NavButton>
             </>
           )
         )}

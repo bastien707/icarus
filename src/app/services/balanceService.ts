@@ -1,8 +1,11 @@
 import type { CustomSession } from '../types/Sessions';
 import { url } from '@/lib/constants';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
-export async function fetchBalance(session: CustomSession | null): Promise<number> {
+export async function fetchBalance(): Promise<number> {
   try {
+    const session: CustomSession | null = await getServerSession(authOptions);
     const res = await fetch(url.API_URL_BALANCE, {
       method: 'POST',
       body: JSON.stringify({ ethAddress: session?.ethAddress }),

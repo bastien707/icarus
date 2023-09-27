@@ -1,18 +1,16 @@
 'use client';
 
 import { offset } from '@/lib/constants';
-import { BiChevronLeft, BiChevronRight, BiChevronLeftSquare } from 'react-icons/bi';
+import { useContext } from 'react';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { TransactionContext } from './Transaction';
 
-interface PaginationProps {
-  loader: boolean;
-  page: number;
-  setPage: (page: number) => void;
-  txLength: number;
-}
+export function Pagination() {
+  const { page, loader, setPage, transactions } = useContext(TransactionContext);
+  const txLength = transactions.length;
 
-export function Pagination({ loader, page, setPage, txLength }: PaginationProps) {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-2">
       <button
         disabled={loader}
         className={`px-4 py-2 ${loader || page <= 1 ? 'cursor-not-allowed text-zinc-400' : ''}`}
