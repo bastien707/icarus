@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --icarus-white: #f5f5f5;
+  --icarus-black: #262626;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--icarus-white);
+}
+
+body {
+  color: var(--icarus-black);
+}
