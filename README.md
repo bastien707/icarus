@@ -1,4 +1,3 @@
-# 🚧 This project is in work in progress
 # Icarus
 Icarus Rise Finance : browse better, for better performance
 
